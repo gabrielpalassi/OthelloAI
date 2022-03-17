@@ -3,16 +3,16 @@ Othello/Reversi is a strategy board game for two players, played on an 8×8 unch
 
 <img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" width="300">
 
-The dark player moves first, followed by the white player, alternating between themselves, until there is no legal move available, or until the board is completely filled. The player with the most diks on the board wins the game, there may be a draw.
+The dark player moves first, followed by the white player, alternating between themselves, until there is no legal move available, or until the board is completely filled. The player with the most disks in the end wins the game.
 
 ### What's a legal move?
 
 To be considered legal, a move must respect the following rules:
 
 1. The disk must be placed onto a spot that was previously empty
-2. When placing the disk, it must surround one or more of the opponet's disks (consecutive) , in line horizontally, vertically or diagonally. (To surround means to have in between two disks of the same colour one or more consecutve disks of the other colour)
+2. When placing the disk, it must surround one or more of the opponet's disks, in line horizontally, vertically or diagonally. (To surround means to have in between two disks of the same colour one or more consecutve disks of the other colour)
 
-The result of a legal move is to change the colour of the other player's disks to the colour of your own (see example below). If a illegal move is performed the player will be punished with the defeat.
+The result of a legal move is to change the colour of the other player's disks to the colour of your own (see example below). If an illegal move is performed the player will be punished with the defeat.
 
 Example:
 
@@ -20,5 +20,5 @@ Example:
 
 ## The Project
 
-This project was created as an university assignment, and is hereby published under the GPL 3.0 license, so that its code is freely available for everyone.
-Each file represents a diferent AI, with diferent approaches to the game (read code comements for further information).
+This project was created as an university assignment, and is hereby published under the GPL 3.0 license so that its code is freely available for everyone.
+Each file represents a diferent AI, with diferent approaches to the game (read code comments for further information).
