@@ -102,7 +102,7 @@ int main()
 
   choosemove(board, colour_program, &line, &column);
   play(board, colour_program, line, column);
-  printf("The AI has place a disk in (%d, %d)\n", line, column);
+  printf("The AI has placed a disk in (%d, %d)\n", line, column);
   print_board(board);
   goto user_turn;
 
