@@ -1,10 +1,9 @@
-
-
 /*
   Othello - Monte Carlo Method based AI - Hard difficulty
+  
   Works by calculating 'max_simulation' number of games ahead of the position and giving each 
-    possible move a score that will determine whats the next move
-  */
+  possible move a score that will determine whats the next move
+*/
 
 
 #include <stdio.h>
