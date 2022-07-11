@@ -22,8 +22,7 @@ void play(int board[8][8], int colour, int l, int c);
 
 /* main function */
 
-int main()
-{
+int main(){
   int board[8][8] = {empty};
   int i, j, colour_user, colour_program, line, column, ok, count_user = 0, count_program = 0;
 
@@ -34,8 +33,7 @@ int main()
   start: /* beggining of the program */
   
   scanf("%d", &colour_user);
-  switch(colour_user) /* select what happens based on the colour the player picked */
-  {
+  switch(colour_user){ /* select what happens based on the colour the player picked */
     case 1:
       colour_program = -1;
       printf("You chose white (1), the AI goes first, lets begin!\n");
@@ -57,22 +55,18 @@ int main()
   for(i = 0; i < 8; i++)
     for(j = 0; j < 8; j++)
       if(canplay(board, colour_user, i, j)) ok = 1; /* verifies if there are valid moves to the user */
-  if(ok) /* if there are valid moves to the user */
-  {
+  if(ok){ /* if there are valid moves to the user */
     printf("Choose a coordinate by entering a line and a column (from 0 to 7), separated by a space, in wich you want to place your disk: ");
     scanf("%d %d", &line, &column);
-    if(canplay(board, colour_user, line, column)) /* verifies if the move is legal, if it's not the game is ended awarding the victory to the AI */
-    {
+    if(canplay(board, colour_user, line, column)){ /* verifies if the move is legal, if it's not the game is ended awarding the victory to the AI */
       play(board, colour_user, line, column);
       print_board(board);
       goto program_turn; /* with the player's turn ended, it's the AI's turn*/
     }
-    else
-    {
+    else{
       printf("You made an illegal move, the game has ended.\n");
       for(i = 0; i < 8; i++) /* counts the points to display in the end */
-        for(j = 0; j < 8; j++)
-        {
+        for(j = 0; j < 8; j++){
           if(board[i][j] == colour_user) count_user++;
           else if(board[i][j] == colour_program) count_program++;
         }
@@ -80,19 +74,16 @@ int main()
       return 0;
     }
   }
-  else if(!ok) /* if there aren't valid moves to the user */
-  {
+  else if(!ok){ /* if there aren't valid moves to the user */
     ok = 0;
     for(i = 0; i < 8; i++)
       for(j = 0; j < 8; j++)
         if(canplay(board, colour_program, i, j)) ok = 1; /* verifies if the AI has available moves */
-    if(ok) /* if there are valid moves to the AI */
-    {
+    if(ok){ /* if there are valid moves to the AI */
       printf("There aren't valid moves for you, you turn has been skipped.\n");
       goto program_turn;
     }
-    else if(!ok) /* if there aren't valid moves for the AI as well, the game is ended */
-    {
+    else if(!ok){ /* if there aren't valid moves for the AI as well, the game is ended */
       printf("There aren't valid moves for any of the players.\n");
       goto count; 
     }
@@ -109,23 +100,19 @@ int main()
   count: /* counts the amount of disks of each colour */
 
   for(i = 0; i < 8; i++)
-    for(j = 0; j < 8; j++)
-    {
+    for(j = 0; j < 8; j++){
       if(board[i][j] == colour_user) count_user++;
       else if(board[i][j] == colour_program) count_program++;
     }
-  if(count_user > count_program)
-  {
+  if(count_user > count_program){
     printf("You won! (User %dx%d AI).", count_user, count_program);
     return 0;
   }
-  else if(count_user < count_program)
-  {
+  else if(count_user < count_program){
     printf("You lost! (User %dx%d AI).", count_user, count_program);
     return 0;
   }
-  else if(count_user == count_program)
-  {
+  else if(count_user == count_program){
     printf("Draw! (User %dx%d AI).", count_user, count_program);
     return 0;
   }
@@ -133,16 +120,13 @@ int main()
 
 /* function definitions */
 
-void print_board(int board[8][8])
-{
+void print_board(int board[8][8]){
   int i, j;
 
   printf("\n     0  1  2  3  4  5  6  7\n\n");
-  for(i = 0; i < 8; i++)
-  {
+  for(i = 0; i < 8; i++){
     printf("%d   ", i);
-    for(j = 0; j < 8; j++)
-    {
+    for(j = 0; j < 8; j++){
       if(board[i][j] == -1) printf("%d ", board[i][j]);
       else printf(" %d ", board[i][j]);
     }
@@ -151,51 +135,43 @@ void print_board(int board[8][8])
   printf("\n");
 }
 
-void choosemove(int board[8][8], int colour, int *line, int *column)
-{
+void choosemove(int board[8][8], int colour, int *line, int *column){
   int k1 = 0, k2 = 0, k3 = 0, i, j, random;
   int line_aux1[60], column_aux1[60], line_aux2[60], column_aux2[60], line_aux3[60], column_aux3[60];
 
   srand(time(NULL)); /* generates a random seed to later choose a random move */
   for(i = 0; i < 8; i++)
     for(j = 0; j < 8; j++)
-      if(canplay(board, colour, i, j)) /* places the possible moves in an auxiliary array */
-      {
-        if(i == 0 || j == 0 || j == 7 || i == 7) /* if it's on the border */
-        {
+      if(canplay(board, colour, i, j)){ /* places the possible moves in an auxiliary array */
+        if(i == 0 || j == 0 || j == 7 || i == 7){ /* if it's on the border */
           line_aux1[k1] = i;
           column_aux1[k1] = j;
           k1++;
         }
-        else if(i == 1 || j == 1 || j == 6 || i == 6) /* if it's 1 square before the border */
-        {
+        else if(i == 1 || j == 1 || j == 6 || i == 6){ /* if it's 1 square before the border */
           line_aux3[k3] = i;
           column_aux3[k3] = j;
           k3++;
         }
-        else /* rest of possible moves */
-        {
+        else{ /* rest of possible moves */
           line_aux2[k2] = i;
           column_aux2[k2] = j;
           k2++;
         }
       }
-  if(k1 > 0) /* gives preferences to moves on the border */
-  {
+  if(k1 > 0){ /* gives preferences to moves on the border */
     random = rand() % (k1); /* generates a random number in the interval of [0,k - 1] */
     *line = line_aux1[random]; /* uses the number to return a random move of the ones listed in the arrays */
     *column = column_aux1[random];
     return;
   }
-  else if(k2 > 0) /* rest of possible moves that aren't one square before the border */
-  {
+  else if(k2 > 0){ /* rest of possible moves that aren't one square before the border */
     random = rand() % (k2);
     *line = line_aux2[random];
     *column = column_aux2[random];
     return;
   }
-  else if(k3 > 0) /* only chooses moves in squares that are 1 square before the border if there aren't any other options */
-  {
+  else if(k3 > 0){ /* only chooses moves in squares that are 1 square before the border if there aren't any other options */
     random = rand() % (k3);
     *line = line_aux3[random];
     *column = column_aux3[random];
@@ -203,73 +179,56 @@ void choosemove(int board[8][8], int colour, int *line, int *column)
   }
 }
 
-int canplay (int board[8][8], int colour, int l, int c)
-{
+int canplay (int board[8][8], int colour, int l, int c){
   int i, j, colour_opposite;
 
   if(board[l][c] != empty || l > 7 || l < 0 || c > 7 || c < 0) return 0; /* positions already occupied or out of the board are not valid */
   if(colour == white) colour_opposite = black;
   else colour_opposite = white;
-  if(board[l][c + 1] == colour_opposite && c < 6) /* verifying right */
-  { /* if the square immediate to the right is not of the opposite colour, or if the chosen sqaure is one square before the border it does not make sense to verify the move */
-    for(i = c + 2; i < 8; i++) /* walking searching for a same colour disk so that the move exists */
-    {
+  if(board[l][c + 1] == colour_opposite && c < 6){ /* verifying right */ /* if the square immediate to the right is not of the opposite colour, or if the chosen square is one square before the border it does not make sense to verify the move */
+    for(i = c + 2; i < 8; i++){ /* walking searching for a same colour disk so that the move exists */
       if(board[l][i] == empty) break; /* if there's an empty space the move is not valid */
       else if(board[l][i] == colour) return 1;
     } 
   }
-  if(board[l][c - 1] == colour_opposite && c > 1) /* verifying left */
-  {
-    for(i = c - 2; i > -1; i--)
-    {
+  if(board[l][c - 1] == colour_opposite && c > 1){ /* verifying left */
+    for(i = c - 2; i > -1; i--){
       if(board[l][i] == empty) break;
       else if(board[l][i] == colour) return 1;
     } 
   }
-  if(board[l - 1][c] == colour_opposite && l > 1) /* verifying up */
-  {
-    for(i = l - 2; i > -1; i--)
-    {
+  if(board[l - 1][c] == colour_opposite && l > 1){ /* verifying up */
+    for(i = l - 2; i > -1; i--){
       if(board[i][c] == empty) break;
       else if(board[i][c] == colour) return 1;
     } 
   }
-  if(board[l + 1][c] == colour_opposite && l < 6) /* verifying down */
-  {
-    for(i = l + 2; i < 8; i++)
-    {
+  if(board[l + 1][c] == colour_opposite && l < 6){ /* verifying down */
+    for(i = l + 2; i < 8; i++){
       if(board[i][c] == empty) break;
       else if(board[i][c] == colour) return 1;
     } 
   }
-  if(board[l - 1][c + 1] == colour_opposite && l > 1 && c < 6) /* verifying upper right diagonal */
-  {
-    for(i = l - 2, j = c + 2; i > -1 && j < 8; i--, j++)
-    {
+  if(board[l - 1][c + 1] == colour_opposite && l > 1 && c < 6){ /* verifying upper right diagonal */
+    for(i = l - 2, j = c + 2; i > -1 && j < 8; i--, j++){
       if(board[i][j] == empty) break;
       else if(board[i][j] == colour) return 1;
     } 
   }
-  if(board[l + 1][c + 1] == colour_opposite && l < 6 && c < 6) /* verifying lower right diagonal */
-  {
-    for(i = l + 2, j = c + 2; i < 8 && j < 8; i++, j++)
-    {
+  if(board[l + 1][c + 1] == colour_opposite && l < 6 && c < 6){ /* verifying lower right diagonal */
+    for(i = l + 2, j = c + 2; i < 8 && j < 8; i++, j++){
       if(board[i][j] == empty) break;
       else if(board[i][j] == colour) return 1;
     } 
   }
-  if(board[l - 1][c - 1] == colour_opposite && l > 1 && c > 1) /* verifying upper left diagonal */
-  {
-    for(i = l - 2, j = c - 2; i > -1 && j > -1; i--, j--)
-    {
+  if(board[l - 1][c - 1] == colour_opposite && l > 1 && c > 1){ /* verifying upper left diagonal */
+    for(i = l - 2, j = c - 2; i > -1 && j > -1; i--, j--){
       if(board[i][j] == empty) break;
       else if(board[i][j] == colour) return 1;
     } 
   }
-  if(board[l + 1][c - 1] == colour_opposite && l < 6 && c > 1) /* verifying lower left diagonal */
-  {
-    for(i = l + 2, j = c - 2; i < 8 && j > -1; i++, j--)
-    {
+  if(board[l + 1][c - 1] == colour_opposite && l < 6 && c > 1){ /* verifying lower left diagonal */
+    for(i = l + 2, j = c - 2; i < 8 && j > -1; i++, j--){
       if(board[i][j] == empty) break;
       else if(board[i][j] == colour) return 1;
     } 
@@ -277,103 +236,78 @@ int canplay (int board[8][8], int colour, int l, int c)
   return 0;
 }
 
-void play(int board[8][8], int colour, int l, int c)
-{
+void play(int board[8][8], int colour, int l, int c){
   int i, j, k, m, colour_opposite;
 
   if(colour == white) colour_opposite = black;
   else colour_opposite = white;
-  if(board[l][c + 1] == colour_opposite && c < 6) /* verifying right */
-  {
-    for(i = c + 2; i < 8; i++)
-    {
+  if(board[l][c + 1] == colour_opposite && c < 6){ /* verifying right */
+    for(i = c + 2; i < 8; i++){
       if(board[l][i] == empty) break;
-      else if(board[l][i] == colour)
-      {
+      else if(board[l][i] == colour){
         for(k = c + 1; k < i; k++) board[l][k] = colour; /* works the same way canplay works, but change the disks' colours instead of returning 1 */
         break;
       }
     } 
   }
-  if(board[l][c - 1] == colour_opposite && c > 1) /* verifying left */
-  {
-    for(i = c - 2; i > -1; i--)
-    {
+  if(board[l][c - 1] == colour_opposite && c > 1){ /* verifying left */
+    for(i = c - 2; i > -1; i--){
       if(board[l][i] == empty) break;
-      else if(board[l][i] == colour)
-      {
+      else if(board[l][i] == colour){
         for(k = c - 1; k > i; k--) board[l][k] = colour;
         break;
       }
     } 
   }
-  if(board[l - 1][c] == colour_opposite && l > 1) /* verifying up */
-  {
-    for(i = l - 2; i > -1; i--)
-    {
+  if(board[l - 1][c] == colour_opposite && l > 1){ /* verifying up */
+    for(i = l - 2; i > -1; i--){
       if(board[i][c] == empty) break;
-      else if(board[i][c] == colour)
-      {
+      else if(board[i][c] == colour){
         for(k = l - 1; k > i; k--) board[k][c] = colour;
         break;
       }
     } 
   }
-  if(board[l + 1][c] == colour_opposite && l < 6) /* verifying down */
-  {
-    for(i = l + 2; i < 8; i++)
-    {
+  if(board[l + 1][c] == colour_opposite && l < 6){ /* verifying down */
+    for(i = l + 2; i < 8; i++){
       if(board[i][c] == empty) break;
-      else if(board[i][c] == colour)
-      {
+      else if(board[i][c] == colour){
         for(k = l + 1; k < i; k++) board[k][c] = colour;
         break;
       }
     } 
   }
-  if(board[l - 1][c + 1] == colour_opposite && l > 1 && c < 6) /* verifying upper right diagonal */
-  {
-    for(i = l - 2, j = c + 2; i > -1 && j < 8; i--, j++)
-    {
+  if(board[l - 1][c + 1] == colour_opposite && l > 1 && c < 6){ /* verifying upper right diagonal */
+    for(i = l - 2, j = c + 2; i > -1 && j < 8; i--, j++){
       if(board[i][j] == empty) break;
-      else if(board[i][j] == colour)
-      {
+      else if(board[i][j] == colour){
         for(k = l - 1, m = c + 1; k > i && m < j; k--, m++) board[k][m] = colour;
         break;
       }
     } 
   }
-  if(board[l + 1][c + 1] == colour_opposite && l < 6 && c < 6) /* verifying lower right diagonal */
-  {
-    for(i = l + 2, j = c + 2; i < 8 && j < 8; i++, j++)
-    {
+  if(board[l + 1][c + 1] == colour_opposite && l < 6 && c < 6){ /* verifying lower right diagonal */
+    for(i = l + 2, j = c + 2; i < 8 && j < 8; i++, j++){
       if(board[i][j] == empty) break;
-      else if(board[i][j] == colour)
-      {
+      else if(board[i][j] == colour){
         for(k = l + 1, m = c + 1; k < i && m < j; k++, m++) board[k][m] = colour;
         break;
       }
     } 
   }
-  if(board[l - 1][c - 1] == colour_opposite && l > 1 && c > 1) /* verifying upper left diagonal */
-  {
-    for(i = l - 2, j = c - 2; i > -1 && j > -1; i--, j--)
-    {
+  if(board[l - 1][c - 1] == colour_opposite && l > 1 && c > 1){ /* verifying upper left diagonal */
+    for(i = l - 2, j = c - 2; i > -1 && j > -1; i--, j--){
       if(board[i][j] == empty) break;
-      else if(board[i][j] == colour)
-      {
+      else if(board[i][j] == colour){
         for(k = l - 1, m = c - 1; k > i && m > j; k--, m--) board[k][m] = colour;
         break;
       }
     } 
   }
-  if(board[l + 1][c - 1] == colour_opposite && l < 6 && c > 1) /* verifying lower left diagonal */
-  {
-    for(i = l + 2, j = c - 2; i < 8 && j > -1; i++, j--)
-    {
+  if(board[l + 1][c - 1] == colour_opposite && l < 6 && c > 1){ /* verifying lower left diagonal */
+    for(i = l + 2, j = c - 2; i < 8 && j > -1; i++, j--){
       if(board[i][j] == empty) break;
-      else if(board[i][j] == colour)
-      {
+      else if(board[i][j] == colour){
         for(k = l + 1, m = c - 1; k < i && m > j; k++, m--) board[k][m] = colour;
         break;
       }
