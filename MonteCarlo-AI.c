@@ -1,7 +1,7 @@
 /*
   Othello - Monte Carlo Method based AI - Hard difficulty
   
-  Works by calculating 'max_simulation' number of games ahead of the position and giving each 
+  Works by simulating 'max_simulation' games ahead of the position and giving each 
   possible move a score that will determine whats the next move
 */
 
@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define max_simulation 100 /* define how many simulations will be done inside the function */
+#define max_simulation 100 /* define how many simulations will be run */
 
 void choosemove (int board[8][8], int color, int *line, int *column);
 int canplay (int board[8][8], int color, int l, int c);
@@ -29,17 +29,17 @@ scanf("%d", &user_color);
 
 switch (user_color){
 case 1:
-    printf("You play as white, the program starts\n");
+    printf("You chose white, the program will make the first move.\n");
     program_color = -1;
     print_board(board);
     break;
 case -1:
-    printf("You play as black\n");
+    printf("You chose black.\n");
     program_color = 1;
     print_board(board);
     break;
 default:
-    printf("You did not choose a valid color\n");
+    printf("You did not choose a valid color.\n");
     return 0;
 }
 
@@ -51,7 +51,7 @@ while (1){
             for (j = 0; j < 8; j++)
                 if (canplay(board, user_color, i, j)) ok = 1;
         if (ok){ 
-            printf("Escolha sua playda digitando line[0,7] e column[0,7]: ");
+            printf("Choose your next move by typing the line[0,7] and column[0,7] in wich you want to place your disk: ");
             scanf("%d %d", &line, &column);
             if (canplay(board, user_color, line, column)){
                 play(board, user_color, line, column);
@@ -59,7 +59,7 @@ while (1){
                 print_board(board);
             }
             else{
-                printf("Voce escolheu uma playda invalida e perdeu\n");
+                printf("You made an illegal move, the game has ended.\n");
                 return 0;
             }
         }
@@ -69,11 +69,11 @@ while (1){
                 for (j = 0; j < 8; j++)
                     if (canplay(board, program_color, i, j)) ok = 1;
             if (ok){
-                printf("Voce nao possui moves validas, eh a vez do programa\n");
+                printf("There aren't valid moves for you, your turn has been skipped.\n");
                 who_play = 1;
             }
             else{
-                printf("Nenhum playdor possui uma playda valida, o jogo terminou\n");
+                printf("There aren't valid moves for any of the players.\n");
                 break;
             }
         }
@@ -87,7 +87,7 @@ while (1){
             choosemove(board, program_color, &line, &column);
             play(board, program_color, line, column);
             who_play = 0;
-            printf("O Programa jogou (%d,%d)\n", line, column);
+            printf("The AI has placed a disk in (%d,%d)\n", line, column);
             print_board(board);
         }
         else{
@@ -96,11 +96,11 @@ while (1){
                 for (j = 0; j < 8; j++)
                     if (canplay(board, user_color, i, j)) ok = 1;
             if (ok){
-                printf("O programa nao possui moves validas, eh a sua vez\n");
+                printf("The AI didn't have any valid moves, it's your turn again.\n");
                 who_play = 0;
             }
             else{
-                printf("Nenhum playdor possui uma playda valida, o jogo terminou\n");
+                printf("There aren't valid moves for any of the players.\n");
                 break;
             }
         }
@@ -114,14 +114,14 @@ for(i = 0; i < 8; i++)
       if(board[i][j] == user_color) cont_user++;
       else if(board[i][j] == program_color) cont_program++;
     }
-if(cont_user > cont_program) printf("Voce Ganhou de %dx%d!\n", cont_user, cont_program);
-else if(cont_user < cont_program) printf("Voce Perdeu de %dx%d!\n", cont_program, cont_user);
-else if(cont_user == cont_program) printf("O jogo empatou de %dx%d!\n", cont_program, cont_user);
+if(cont_user > cont_program) printf("You won! %dx%d\n", cont_user, cont_program);
+else if(cont_user < cont_program) printf("You lost. %dx%d\n", cont_program, cont_user);
+else if(cont_user == cont_program) printf("Draw! %dx%d\n", cont_program, cont_user);
 
 return 0;
 }
 
-/* Functions of the game */
+/* Functions */
 
 void choosemove (int board[8][8], int color, int *line, int *column){
     int move_line[64], move_collumn[64], points_aux[max_simulation]={0}, board_aux[8][8];
@@ -358,7 +358,3 @@ void play (int board[8][8], int color, int l, int c){
         }
     }
 }
-
-
-
-
