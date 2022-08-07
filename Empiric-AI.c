@@ -80,7 +80,7 @@ int main(){
       for(j = 0; j < 8; j++)
         if(canplay(board, colour_program, i, j)) ok = 1; /* verifies if the AI has available moves */
     if(ok){ /* if there are valid moves to the AI */
-      printf("There aren't valid moves for you, you turn has been skipped.\n");
+      printf("There aren't valid moves for you, your turn has been skipped.\n");
       goto program_turn;
     }
     else if(!ok){ /* if there aren't valid moves for the AI as well, the game is ended */
