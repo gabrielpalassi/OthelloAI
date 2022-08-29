@@ -17,108 +17,108 @@ void play (int board[8][8], int color, int l, int c);
 void print_board (int board[8][8]);
 
 int main(){
-int user_color = 0, program_color = 0, ok = 0, who_play = 0, i, j;
-int board[8][8] = {0}, line = 0, column = 0, cont_program = 0, cont_user = 0;
+    int user_color = 0, program_color = 0, ok = 0, who_play = 0, i, j;
+    int board[8][8] = {0}, line = 0, column = 0, cont_program = 0, cont_user = 0;
 
-/* Initial Board */
-board[3][3] = board[4][4] = 1;
-board[3][4] = board[4][3] = -1;
+    /* Initial Board */
+    board[3][3] = board[4][4] = 1;
+    board[3][4] = board[4][3] = -1;
 
-printf("Type 1 to play as white or -1 to play as black: ");
-scanf("%d", &user_color);
+    printf("Type 1 to play as white or -1 to play as black: ");
+    scanf("%d", &user_color);
 
-switch (user_color){
-case 1:
-    printf("You chose white, the program will make the first move.\n");
-    program_color = -1;
-    print_board(board);
-    break;
-case -1:
-    printf("You chose black.\n");
-    program_color = 1;
-    print_board(board);
-    break;
-default:
-    printf("You did not choose a valid color.\n");
-    return 0;
-}
+    switch (user_color){
+    case 1:
+        printf("You chose white, the program will make the first move.\n");
+        program_color = -1;
+        print_board(board);
+        break;
+    case -1:
+        printf("You chose black.\n");
+        program_color = 1;
+        print_board(board);
+        break;
+    default:
+        printf("You did not choose a valid color.\n");
+        return 0;
+    }
 
-who_play = user_color + 1;
-while (1){ 
-    if(!who_play){ 
-        ok = 0; 
-        for (i = 0; i < 8; i++)
-            for (j = 0; j < 8; j++)
-                if (canplay(board, user_color, i, j)) ok = 1;
-        if (ok){ 
-            printf("Choose your next move by typing the line[0,7] and column[0,7] in wich you want to place your disk: ");
-            scanf("%d %d", &line, &column);
-            if (canplay(board, user_color, line, column)){
-                play(board, user_color, line, column);
-                who_play = 1;
-                print_board(board);
+    who_play = user_color + 1;
+    while (1){ 
+        if(!who_play){ 
+            ok = 0; 
+            for (i = 0; i < 8; i++)
+                for (j = 0; j < 8; j++)
+                    if (canplay(board, user_color, i, j)) ok = 1;
+            if (ok){ 
+                printf("Choose your next move by typing the line[0,7] and column[0,7] in wich you want to place your disk: ");
+                scanf("%d %d", &line, &column);
+                if (canplay(board, user_color, line, column)){
+                    play(board, user_color, line, column);
+                    who_play = 1;
+                    print_board(board);
+                }
+                else{
+                    printf("You made an illegal move, the game has ended.\n");
+                    return 0;
+                }
             }
             else{
-                printf("You made an illegal move, the game has ended.\n");
-                return 0;
+                ok = 0; 
+                for (i = 0; i < 8; i++)
+                    for (j = 0; j < 8; j++)
+                        if (canplay(board, program_color, i, j)) ok = 1;
+                if (ok){
+                    printf("There aren't valid moves for you, your turn has been skipped.\n");
+                    who_play = 1;
+                }
+                else{
+                    printf("There aren't valid moves for any of the players.\n");
+                    break;
+                }
             }
         }
-        else{
+        if (who_play){ 
             ok = 0; 
             for (i = 0; i < 8; i++)
                 for (j = 0; j < 8; j++)
                     if (canplay(board, program_color, i, j)) ok = 1;
             if (ok){
-                printf("There aren't valid moves for you, your turn has been skipped.\n");
-                who_play = 1;
-            }
-            else{
-                printf("There aren't valid moves for any of the players.\n");
-                break;
-            }
-        }
-    }
-    if (who_play){ 
-        ok = 0; 
-        for (i = 0; i < 8; i++)
-            for (j = 0; j < 8; j++)
-                if (canplay(board, program_color, i, j)) ok = 1;
-        if (ok){
-            choosemove(board, program_color, &line, &column);
-            play(board, program_color, line, column);
-            who_play = 0;
-            printf("The AI has placed a disk in (%d,%d)\n", line, column);
-            print_board(board);
-        }
-        else{
-            ok = 0;
-            for (i = 0; i < 8; i++)
-                for (j = 0; j < 8; j++)
-                    if (canplay(board, user_color, i, j)) ok = 1;
-            if (ok){
-                printf("The AI didn't have any valid moves, it's your turn again.\n");
+                choosemove(board, program_color, &line, &column);
+                play(board, program_color, line, column);
                 who_play = 0;
+                printf("The AI has placed a disk in (%d,%d)\n", line, column);
+                print_board(board);
             }
             else{
-                printf("There aren't valid moves for any of the players.\n");
-                break;
+                ok = 0;
+                for (i = 0; i < 8; i++)
+                    for (j = 0; j < 8; j++)
+                        if (canplay(board, user_color, i, j)) ok = 1;
+                if (ok){
+                    printf("The AI didn't have any valid moves, it's your turn again.\n");
+                    who_play = 0;
+                }
+                else{
+                    printf("There aren't valid moves for any of the players.\n");
+                    break;
+                }
             }
         }
+
     }
 
-}
 
+    for(i = 0; i < 8; i++)
+        for(j = 0; j < 8; j++){
+        if(board[i][j] == user_color) cont_user++;
+        else if(board[i][j] == program_color) cont_program++;
+        }
+    if(cont_user > cont_program) printf("You won! %dx%d\n", cont_user, cont_program);
+    else if(cont_user < cont_program) printf("You lost. %dx%d\n", cont_program, cont_user);
+    else if(cont_user == cont_program) printf("Draw! %dx%d\n", cont_program, cont_user);
 
-for(i = 0; i < 8; i++)
-    for(j = 0; j < 8; j++){
-      if(board[i][j] == user_color) cont_user++;
-      else if(board[i][j] == program_color) cont_program++;
-    }
-if(cont_user > cont_program) printf("You won! %dx%d\n", cont_user, cont_program);
-else if(cont_user < cont_program) printf("You lost. %dx%d\n", cont_program, cont_user);
-else if(cont_user == cont_program) printf("Draw! %dx%d\n", cont_program, cont_user);
-
-return 0;
+    return 0;
 }
 
 /* Functions */
