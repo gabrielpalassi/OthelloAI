@@ -20,5 +20,4 @@ Example:
 
 ## The Project
 
-This project was created as an university assignment, and is hereby published under the GPL 3.0 license so that its code is freely available for everyone.
-Each file represents a diferent AI, with diferent approaches to the game (read code comments for further information).
+This project was created as an university assignment, and is hereby published under the GPL 3.0 license so that its code is freely available for everyone. The game is 100% CLI-based and can be executed by compiling the code contained in any of the .c files of this repository. Each file represents a diferent AI, with diferent approaches to the game (read code comments for further information).
