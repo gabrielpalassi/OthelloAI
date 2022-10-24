@@ -51,7 +51,7 @@ int main(){
                 for (j = 0; j < 8; j++)
                     if (canplay(board, user_color, i, j)) ok = 1;
             if (ok){ 
-                printf("Choose your next move by typing the line[0,7] and column[0,7] in wich you want to place your disk: ");
+                printf("Choose your next move by typing the line[0,7] and column[0,7] in which you want to place your disk: ");
                 scanf("%d %d", &line, &column);
                 if (canplay(board, user_color, line, column)){
                     play(board, user_color, line, column);
