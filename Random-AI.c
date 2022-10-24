@@ -56,7 +56,7 @@ int main(){
     for(j = 0; j < 8; j++)
       if(canplay(board, colour_user, i, j)) ok = 1; /* verifies if there are valid moves to the user */
   if(ok){ /* if there are valid moves to the user */
-    printf("Choose a coordinate by entering a line and a column (from 0 to 7), separated by a space, in wich you want to place your disk: ");
+    printf("Choose a coordinate by entering a line and a column (from 0 to 7), separated by a space, in which you want to place your disk: ");
     scanf("%d %d", &line, &column);
     if(canplay(board, colour_user, line, column)){ /* verifies if the move is legal, if it's not the game is ended awarding the victory to the AI */
       play(board, colour_user, line, column);
