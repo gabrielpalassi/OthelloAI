@@ -1,14 +1,13 @@
-<h1 align="center">
-  <p align="center">Othello/Reversi</p>
-</h1>
-<p align="center">Othello/Reversi is a strategy board game for two players, played on an 8×8 board, the game begins with four disks placed in a square in the middle of the grid, two facing white-side-up, two dark-side-up, so that the same-coloured disks are on a diagonal.</p>
+# Othello/Reversi
+
+Othello/Reversi is a strategy board game for two players, played on an 8×8 board, the game begins with four disks placed in a square in the middle of the grid, two facing white-side-up, two dark-side-up, so that the same-coloured disks are on a diagonal.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" width="300">
 </div>
 <br>
 
-<p align="center">The dark player moves first, followed by the white player, alternating between themselves, until there is no legal move available, or until the board is completely filled. The player with the most disks in the end wins the game.</p>
+The dark player moves first, followed by the white player, alternating between themselves, until there is no legal move available, or until the board is completely filled. The player with the most disks in the end wins the game.
 
 ## What's a legal move?
 
