@@ -1,11 +1,8 @@
-# Othello/Reversi
+# ♟️ OthelloAI
 
 Othello/Reversi is a strategy board game for two players, played on an 8×8 board, the game begins with four disks placed in a square in the middle of the grid, two facing white-side-up, two dark-side-up, so that the same-coloured disks are on a diagonal.
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" width="300">
-</div>
-<br>
+<img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" width="300">
 
 The dark player moves first, followed by the white player, alternating between themselves, until there is no legal move available, or until the board is completely filled. The player with the most disks in the end wins the game.
 
@@ -20,7 +17,9 @@ The result of a legal move is to change the colour of the other player's disks t
 
 Example:
 
-<img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" height="250"> <img src="https://user-images.githubusercontent.com/83798084/158712130-2d27a411-35d4-496e-86b5-2432d05a593a.png" height="250"> <img src="https://user-images.githubusercontent.com/83798084/158712240-ec66a296-4047-4256-98a2-4ee74e49c738.png" height="250">
+<img src="https://user-images.githubusercontent.com/83798084/158694935-54883de6-0fc6-428c-906b-7bc67dfd4a14.png" height="250">
+<img src="https://user-images.githubusercontent.com/83798084/158712130-2d27a411-35d4-496e-86b5-2432d05a593a.png" height="250">
+<img src="https://user-images.githubusercontent.com/83798084/158712240-ec66a296-4047-4256-98a2-4ee74e49c738.png" height="250">
 
 ## The Project
 
